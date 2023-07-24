@@ -12,7 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "http-server": "^14.1.1",
-    "ipfs-http-client": "^56.0.3"
+    "ipfs-http-client": "^56.0.3",
+    "timers-browserify": "^2.0.12",
+    "y-array": "^10.1.4",
+    "y-ipfs-connector": "^2.3.0",
+    "y-memory": "^8.0.9",
+    "y-text": "^9.5.1",
+    "yjs": "^13.6.7"
   },
   "devDependencies": {
     "webpack": "^5.88.2",

@@ -1,4 +1,9 @@
 const IPFS = require('ipfs-http-client');
+const Y = require('yjs')
+require('y-memory')(Y)
+require('y-array')(Y)
+require('y-text')(Y)
+require('y-ipfs-connector')(Y)
 
 function repo() {
   return 'yjs-demo/' + Math.random();
@@ -9,6 +14,9 @@ const ipfs = IPFS.create({
   port: '5002', 
   protocol: 'http',
   repo: repo(), 
+  EXPERIMENTAL: {
+    pubsub: true
+  }
 });
 
 console.log('Before calling ipfs.id()');
@@ -22,3 +30,25 @@ ipfs.id()
   });
 
 console.log('After calling ipfs.id()');
+
+ipfs.once('ready', () => ipfs.id((err, info) => {
+  if (err) { throw err }
+
+  console.log('IPFS node ready with address ' + info.id)
+
+  Y({
+    db: {
+      name: 'memory'
+    },
+    connector: {
+      name: 'ipfs',
+      room: 'ipfs-yjs-demo',
+      ipfs: ipfs
+    },
+    share: {
+      textfield: 'Text'
+    }
+  }).then((y) => {
+    y.share.textfield.bind(document.getElementById('textfield'))
+  })
+}))
