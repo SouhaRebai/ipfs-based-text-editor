@@ -11,6 +11,8 @@ const ipfs = IPFS.create({
   repo: repo(), 
 });
 
+console.log('Before calling ipfs.id()');
+
 ipfs.id()
   .then((info) => {
     console.log('IPFS node ready with address ' + info.id);
@@ -18,3 +20,5 @@ ipfs.id()
   .catch((err) => {
     console.error('Error while getting IPFS node ID:', err);
   });
+
+console.log('After calling ipfs.id()');
