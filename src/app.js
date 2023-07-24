@@ -1,5 +1,6 @@
-const IPFS = require('ipfs-http-client');
+const IPFS = require('ipfs');
 const Y = require('yjs')
+console.log(Y.utils);
 require('y-memory')(Y)
 require('y-array')(Y)
 require('y-text')(Y)
